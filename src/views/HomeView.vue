@@ -1,145 +1,366 @@
+<script setup>
+import { ref } from 'vue'
+
+const dropdown = ref(false)
+
+const dropdown_show = () => {
+  dropdown.value = true
+}
+
+const dropdown_hide = () => {
+  dropdown.value = false
+}
+
+const userdata = JSON.parse(localStorage.getItem('user'))
+</script>
 <template>
+  <main class="h-screen bg-[#E8E8E8]">
+    <!-- Navbar -->
 
-  <!-- screen 1 -->
-  <div class="min-h-screen bg-gradient-to-r from-indigo-100 via-blue-200 to-indigo-300">
-  
-    <div class="grid-cols-12">
-        <p class="relative text-gray-800 text-4xl md:text-5xl pt-36 text-center font-['Poppins'] font-extrabold">
-          Make Laundry
-        </p>
-        <p class="text-center font-bold font-['Poppins'] text-blue-500/90 pt-3 md:pt-6 text-4xl md:text-5xl">
-          Get clean
-        </p>
-        <p class="text-gray-800 text-center pt-6 md:pt-8 md:text-xl font-['Poppins']">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, corrupti. 
-        </p>
-        
-        <a
-        class="flex items-center justify-center" 
-        href="#">
-            <button 
-            class="bg-white hover:bg-white duration-300 p-4 w-56 md:w-72 
-            rounded-xl mt-10 lg:mt-10 
-            border-2 border-b-8 border-gray-900
-            border-r-8 border-gray-900 hover:border-2 duration-100 shadow-xl
-            text-center text-gray-900 font-['Poppins'] font-extrabold text-xl tracking-widest ">
-               Get Started.
-            </button>
+    <nav class="box-border bg-[#E8E8E8] w-full h-[5rem]">
+      <div class="flex items-center justify-between z-20 text-black py-5 container mx-auto">
+        <a href="#" class="font-['Poppins'] font-semibold tracking-wide text-2xl flex-shrink-0">
+          Futsalverse™
         </a>
+        <ul class="flex items-center justify-center space-x-14 w-80 mx-auto">
+          <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
+            <a href="">Address</a>
+          </li>
+          <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
+            <a href="">Services</a>
+          </li>
+          <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
+            <a href="">Contact</a>
+          </li>
+        </ul>
 
-    </div>
-  </div>
+        <div v-if="userdata">
+          <button
+            v-if="dropdown"
+            @click="dropdown_hide"
+            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+          >
+            <div class="font-['Poppins'] font-semibold text-sm tracking-wide">
+              {{ userdata.name }}
+            </div>
+          </button>
 
-  <!-- tumpukan -->
-  <div class="absolute mx-[5%] md:mx-[12.5%] lg:mx-[20%] rounded-xl
-    -bottom-[50%] md:bottom-[6%] lg:-bottom-60
-    bg-gray-100 
-    w-[90%] md:w-[75%] lg:w-[60%] 
-    h-[90%] md:h-[40%] lg:h-[55%]">
+          <div v-if="dropdown" class="absolute z-50 right-9 mt-2">
+            <div class="box-border w-40 h-20 bg-white rounded-xl flex items-center justify-center">
+              <div class="flex-row">
+                <p>{{ userdata.email }}</p>
+                <p>2</p>
+                <p>3</p>
+              </div>
+            </div>
+          </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 pt-7 md:pt-4 lg:pt-2 2xl:pt-8">
-      
-      <div class="mx-auto p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M412 200.157a28 28 0 1 0-28-28 28.031 28.031 0 0 0 28 28zm0-40a12 12 0 1 1-12 12 12.013 12.013 0 0 1 12-12zM480 32.157h16v16h-16zM88 384.157h16v16H88zM144 304.157h16v16h-16zM80 112.157h16v16H80zM68.161 231.176l23.8 13.019L104.981 268a8 8 0 0 0 14.038 0l13.018-23.8 23.8-13.019a8 8 0 0 0 0-14.037l-23.8-13.018-13.018-23.8a8 8 0 0 0-14.038 0l-13.018 23.8-23.8 13.018a8 8 0 0 0 0 14.037zm33.539-14.142a8 8 0 0 0 3.181-3.18L112 200.83l7.123 13.024a8 8 0 0 0 3.181 3.18l13.024 7.123-13.028 7.124a8.006 8.006 0 0 0-3.18 3.18L112 247.485l-7.123-13.024a8.006 8.006 0 0 0-3.18-3.18l-13.024-7.124zM407.019 244.318a8 8 0 0 0-14.038 0l-13.018 23.8-23.8 13.018a8 8 0 0 0 0 14.037l23.8 13.019L392.981 332a8 8 0 0 0 14.038 0l13.018-23.8 23.8-13.019a8 8 0 0 0 0-14.037l-23.8-13.018zm3.284 50.963a8.006 8.006 0 0 0-3.18 3.18L400 311.485l-7.123-13.024a8.006 8.006 0 0 0-3.18-3.18l-13.024-7.124 13.024-7.123a8 8 0 0 0 3.181-3.18L400 264.83l7.123 13.024a8 8 0 0 0 3.181 3.18l13.024 7.123z" fill="#000000" data-original="#000000"></path><path d="M497.665 398.5a67.974 67.974 0 0 0 4.737-35.843l-4.6-36.3a67.868 67.868 0 0 0 4.6-35.536L471.139 54.895C466.629 22.573 438.935 0 403.791 0H108.209C73.065 0 45.371 22.573 40.854 54.949L9.606 290.76a67.978 67.978 0 0 0 4.594 35.587l-4.6 36.307a67.974 67.974 0 0 0 4.735 35.846l-4.729 36.1A68 68 0 0 0 76.954 512h358.092a68 68 0 0 0 67.354-77.331zM25.453 364.813l.013-.1 2.24-17.686a67.966 67.966 0 0 0 49.247 21.13h358.093a67.966 67.966 0 0 0 49.247-21.13l2.24 17.686.013.1a52 52 0 0 1-51.5 59.187H76.954a52 52 0 0 1-51.5-59.187zM204.3 16h103.4L256 132.441zm36.643 121.969L140.241 100.2l50.354-75.65zM321.405 24.55l50.354 75.65-100.707 37.769zm133.879 32.5 31.263 235.92a52 52 0 0 1-51.5 59.187H264V157.7l122.809-46.053a8 8 0 0 0 3.851-11.923L334.935 16h68.857c27.373 0 48.069 16.519 51.493 41.051zM25.46 292.916 56.708 57.105C60.139 32.519 80.835 16 108.209 16h68.857L121.34 99.725a8 8 0 0 0 3.851 11.923L248 157.7v194.457H76.954a52 52 0 0 1-51.494-59.241zm448.814 185.219A51.983 51.983 0 0 1 435.046 496H76.954a52 52 0 0 1-51.492-59.253l2.33-17.785A67.967 67.967 0 0 0 76.954 440h358.092a67.967 67.967 0 0 0 49.163-21.038l2.338 17.851a51.982 51.982 0 0 1-12.273 41.322z" fill="#000000" data-original="#000000"></path><path d="M296 192.157h16v24h-16zM296 264.157h16v24h-16z" fill="#000000" data-original="#000000"></path></g></svg>
+          <button
+            v-else
+            @click="dropdown_show"
+            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+          >
+            <div class="font-['Poppins'] font-semibold text-sm tracking-wide">
+              {{ userdata.name }}
+            </div>
+            
+          </button>
         </div>
-        <p class="absolute mt-4 -ml-1 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Dry cleaning
-        </p>
-      </div> 
 
-      <div class="mx-auto p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" 
-          height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" 
-          xml:space="preserve" 
-          class=""><g><path d="M475.045 277.048h-20.448c-35.276 0-69.991-9.46-100.39-27.359l-54.997-32.381a171.583 171.583 0 0 1-64.277-66.982l-13.284-24.851c-6.045-11.308-19.987-16.153-31.744-11.028l-16.8 7.324a24.765 24.765 0 0 0-14.872 22.706v13.004c0 5.143-3.041 9.803-7.748 11.875-20.93 9.209-44.897 4.712-61.064-11.456a21.045 21.045 0 0 0-14.979-6.204c-11.681 0-21.184 9.503-21.184 21.183v11.057c0 9.319-3.629 18.081-10.219 24.67-9.423 9.423-14.612 21.951-14.612 35.276v56.094L1.2 342.128c-.036.056-.064.115-.099.171-.086.141-.17.281-.247.428-.045.086-.084.174-.126.261a8.109 8.109 0 0 0-.181.403c-.043.105-.079.212-.116.318-.043.122-.086.243-.123.368-.037.124-.066.249-.096.375-.026.11-.054.22-.075.332-.028.144-.047.288-.066.432-.013.098-.028.195-.037.294-.015.161-.02.323-.024.484-.001.067-.01.134-.01.203l.002.088.003.135c.121 29.34 24.022 53.172 53.389 53.172h373.017c47.194 0 85.589-38.395 85.589-85.589 0-20.377-16.578-36.955-36.955-36.955zM173.232 157.48v-13.004a9.77 9.77 0 0 1 5.866-8.956l16.8-7.324c4.636-2.021 10.137-.11 12.521 4.35l13.284 24.851a186.682 186.682 0 0 0 8.866 14.839l-22.454 8.878a69.66 69.66 0 0 0-36.766-13.559 27.898 27.898 0 0 0 1.883-10.075zM68.258 183.935v-11.057a6.19 6.19 0 0 1 6.184-6.183c1.651 0 3.204.644 4.372 1.811 20.346 20.347 50.398 26.157 76.819 14.952l1.136-.204a54.765 54.765 0 0 1 36.376 6.042l-33.106 20.332c-25.681 15.771-56.963 19.852-85.828 11.196l-17.314-5.192c7.356-8.909 11.361-19.995 11.361-31.697zm-24.831 95.783h9.454c9.759 0 18.081 6.257 21.176 14.968h-30.63v-14.968zm335.681 68.678h48.482c24.088 0 47.35-6.618 67.738-19.165-6.983 31.624-35.222 55.361-68.917 55.361H53.395c-20.46 0-37.231-16.088-38.333-36.278l24.95-38.627h60.701c11.546 0 22.399 4.496 30.563 12.66l3.945 3.945c14.254 14.252 33.204 22.102 53.359 22.102h157.648a7.5 7.5 0 0 0 7.5-7.5 7.5 7.5 0 0 0-7.5-7.5H188.579c-9.051 0-17.798-1.978-25.749-5.724l18.012-47.763a7.5 7.5 0 0 0-14.035-5.293l-16.893 44.795a61.689 61.689 0 0 1-4.088-3.724l-3.944-3.944c-10.997-10.997-25.618-17.053-41.17-17.053H89.594c-3.484-17.078-18.62-29.968-36.713-29.968h-9.454v-20.836a34.723 34.723 0 0 1 3.642-15.536l22.833 6.847c32.953 9.881 68.668 5.223 97.986-12.782l24.213-14.87-14.834 39.333a7.5 7.5 0 0 0 7.017 10.148 7.505 7.505 0 0 0 7.019-4.855l21.396-56.734 26.916-10.641a186.453 186.453 0 0 0 5.017 6.087l-25.447 31.032a7.5 7.5 0 0 0 11.6 9.512l24.156-29.458a186.475 186.475 0 0 0 14.521 12.963l-11.865 35.749a7.498 7.498 0 0 0 4.756 9.48c.784.26 1.58.384 2.363.384a7.503 7.503 0 0 0 7.117-5.139l10.333-31.133a186.703 186.703 0 0 0 9.433 5.966l5.866 3.454-2.22 35.32a7.5 7.5 0 0 0 7.493 7.971 7.501 7.501 0 0 0 7.479-7.03l1.743-27.727 17.585 10.354 1.664 26.955a7.5 7.5 0 1 0 14.971-.925l-1.04-16.849 1.457.858a212.369 212.369 0 0 0 23.763 12.044l.223 10.392a7.5 7.5 0 0 0 7.495 7.339c.055 0 .109 0 .164-.002a7.5 7.5 0 0 0 7.337-7.659l-.091-4.221a212.981 212.981 0 0 0 69.109 11.54h20.448c10.844 0 19.876 7.9 21.642 18.248l-3.849 2.672c-19.251 13.362-41.813 20.425-65.248 20.425h-48.482a7.5 7.5 0 0 0-7.5 7.5 7.5 7.5 0 0 0 7.5 7.5z" fill="#000000" data-original="#000000" class=""></path><circle cx="106.25" cy="338.849" r="7.706" fill="#000000" data-original="#000000" class=""></circle><circle cx="77.63" cy="338.849" r="7.706" fill="#000000" data-original="#000000" class=""></circle><circle cx="47.829" cy="338.849" r="7.706" fill="#000000" data-original="#000000" class=""></circle></g></svg>
-        </div>
-        <p class="absolute mt-4 -ml-3 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Shoe cleaning
-        </p>
-      </div> 
+        <div v-else>
+          <button
+            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+          >
+            <RouterLink to="login" class="font-['Poppins'] font-semibold text-sm tracking-wide"
+              >Sign in</RouterLink
+            >
+          </button>
 
-      <div class="mx-auto pt-10 md:p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <i class="fa-regular fa-washing-machine text-gray-900 text-5xl"></i>
+          <button
+            class="p-3 px-4 border-2 border-black bg-black rounded-xl flex items-center justify-center hover:bg-gray-500 duration-300"
+          >
+            <RouterLink
+              to="register"
+              class="font-['Poppins'] font-semibold text-sm text-white tracking-wide"
+              >Get Started</RouterLink
+            >
+          </button>
         </div>
-        <p class=" relative mt-4 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Laundry
-        </p>
       </div>
-      
-      <div class="mx-auto pt-10 md:p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 60 60" style="enable-background:new 0 0 512 512" xml:space="preserve" 
-          class="mt-2"><g><path d="M58.344 5.686A3 3 0 0 0 55.713.3c-.024.01-2.393 1.054-8.855 1.838a2.982 2.982 0 0 0-5.824.532C37.6 2.885 33.906 3 30 3c-3.965 0-7.661-.119-11.035-.342a2.982 2.982 0 0 0-5.823-.524C6.657 1.348 4.335.311 4.315.3a3 3 0 0 0-2.653 5.386C1.981 5.845 4.94 7.223 13 8.152v6.168a3.939 3.939 0 0 0-1.508 1.522l-6.1 11.832a3.255 3.255 0 0 0 1.242 4.364l4.42 2.53a3.222 3.222 0 0 0 4.15-.8 1.025 1.025 0 0 0 .076-.11l.72-1.205V47a3 3 0 0 0 3 3 1 1 0 0 1 1 1v6a3 3 0 0 0 3.5 2.96 3.084 3.084 0 0 0 2.5-3.067v-1.786a1.083 1.083 0 0 1 .825-1.092A1 1 0 0 1 28 55v.893a3.084 3.084 0 0 0 2.5 3.067A3 3 0 0 0 34 56v-5a1 1 0 0 1 2 0v6a3 3 0 0 0 3 3 3.161 3.161 0 0 0 .493-.04A3.084 3.084 0 0 0 42 56.893v-7.078A2.994 2.994 0 0 0 44 47V32.452l.72 1.21a1.025 1.025 0 0 0 .076.11 3.224 3.224 0 0 0 4.15.8l4.415-2.528a3.25 3.25 0 0 0 1.256-4.348l-6.123-11.881A3.882 3.882 0 0 0 47 14.325V8.152c8.065-.929 11.024-2.307 11.344-2.466Zm-1.779-3.581a1.009 1.009 0 0 1 1.332.463.988.988 0 0 1-.448 1.332c-.028.01-2.757 1.332-10.449 2.24V4.132c7.1-.853 9.566-2.027 9.565-2.027ZM43 3a1 1 0 0 1 2 0v13a1 1 0 0 1-2 0Zm-4.653 8.062a1.027 1.027 0 0 0-.742.019C37.583 11.09 35.36 12 30 12s-7.583-.91-7.6-.916a.993.993 0 0 0-.748-.022L19 12.045V8.673C22.359 8.886 26.041 9 30 9s7.641-.114 11-.327v3.372Zm-1.806 2.373a6.962 6.962 0 0 1-13.073 0A32.454 32.454 0 0 0 30 14a32.554 32.554 0 0 0 6.541-.565ZM41 4.672v2C37.65 6.886 33.966 7 30 7s-7.65-.114-11-.33V4.664C22.373 4.883 26.056 5 30 5c3.888 0 7.573-.114 11-.328ZM15 3a1 1 0 0 1 2 0v13a1 1 0 0 1-2 0Zm-12.44.9a1 1 0 0 1 .867-1.8C3.451 2.106 5.94 3.281 13 4.131v2.008C5.312 5.231 2.584 3.911 2.56 3.9ZM18 47v-3.058a7.8 7.8 0 0 0 3.9-1.62 6.018 6.018 0 0 1 7.527 0 8 8 0 0 0 9.807 0A6.064 6.064 0 0 1 42 41.076V47a1 1 0 0 1-1 1H19a1 1 0 0 1-1-1Zm14 4v5a1 1 0 0 1-.353.763 1.009 1.009 0 0 1-.822.222A1.083 1.083 0 0 1 30 55.893V55a3 3 0 0 0-3.5-2.96 3.084 3.084 0 0 0-2.5 3.067v1.786a1.083 1.083 0 0 1-.825 1.092A1 1 0 0 1 22 57v-6a2.966 2.966 0 0 0-.184-1h10.368A2.966 2.966 0 0 0 32 51Zm7.175 6.985A1 1 0 0 1 38 57v-6a2.966 2.966 0 0 0-.184-1H40v6.893a1.083 1.083 0 0 1-.825 1.092ZM52.85 28.627a1.248 1.248 0 0 1-.478 1.675l-4.42 2.53a1.23 1.23 0 0 1-1.553-.259l-2.541-4.264A1 1 0 0 0 42 28.82v10.238a7.812 7.812 0 0 0-3.9 1.62 6.022 6.022 0 0 1-7.53 0 8 8 0 0 0-9.8 0A6.056 6.056 0 0 1 18 41.924V28.82a1 1 0 0 0-1.858-.511L13.6 32.573a1.23 1.23 0 0 1-1.554.259L7.624 30.3a1.252 1.252 0 0 1-.464-1.692l6.009-11.657A2.992 2.992 0 0 0 19 16v-1.823l2.294-.849a9.016 9.016 0 0 0 17.412 0l2.294.849V16a2.992 2.992 0 0 0 5.831.952Z" fill="#000000" data-original="#000000" class=""></path></g></svg>
-        </div>
-        <p class=" absolute -ml-2 mt-4 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Wet cleaning
-        </p>
-      </div> 
+    </nav>
 
-      <!-- row 2 -->
+    <!-- end of navbar -->
 
-      <div class="mx-auto p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><defs><clipPath id="a" clipPathUnits="userSpaceOnUse"><path d="M0 512h512V0H0Z" fill="#000000" data-original="#000000"></path></clipPath></defs><g clip-path="url(#a)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)"><path d="M0 0h167.276" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(192.408 504.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="m0 0-83.652-87.152 32.534-30.904c15.231-13.297 27.506-11.964 36.115 3.233l41.485 73.316C26.482-21.434 25.204-13.155 0 0Z" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(359.685 504.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="m0 0 83.624-87.152-32.535-30.904c-15.23-13.297-27.477-11.964-36.086 3.233l-41.485 73.316C-26.482-21.434-25.232-13.155 0 0z" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(192.408 504.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-141.615c0-4.961-4.063-9.016-9.036-9.016h-49.413c-4.972 0-9.064 4.055-9.064 9.016V0" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(309.789 385.396)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-.057" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(276.032 320.272)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-.057" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(276.032 362.998)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="m0 0 67.513.057" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(242.276 277.49)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h136.276c16.253 0 29.608 13.297 29.608 29.542l-.029 10.462M-160.23 405.651l-14.719-4.422c-20.373-6.095-25.402-17.125-25.402-37.877l-.228-333.81C-200.607 13.297-187.252 0-170.971 0h136.248" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(253.3 7.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="m0 0 .114 159.59c0 20.753 5.029 31.782 25.403 37.877l47.48 14.261m220.241 0 47.453-14.261c20.373-6.095 25.402-17.124 25.431-37.877l.227-333.81c0-16.245-13.327-29.542-29.608-29.542H29.495c-16.282 0-29.637 13.297-29.608 29.542l.085 139.603" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(92.929 251.266)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path></g></g></svg>
-        </div>
-        <p class="absolute mt-4 -ml-3 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Wash and fold
+    <!-- start content -->
+    <div class="flex items-center justify-center mx-auto">
+      <div class="box-border bg-[#F55736] w-[75rem] h-72 mt-5 rounded-2xl">
+        <p
+          class="font-['Poppins'] font-extrabold text-gray-50 text-7xl w-96 ml-16 mt-28 tracking-wide relative z-50"
+        >
+          Futsalverse is already
         </p>
-      </div> 
+        <p
+          class="font-['Poppins'] font-black text-black text-7xl w-96 ml-16 mt-16 tracking-wide relative z-50"
+        >
+          Vinci per noi.
+        </p>
 
-      <div class="mx-auto p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><defs><clipPath id="a" clipPathUnits="userSpaceOnUse"><path d="M0 512h512V0H0Z" fill="#000000" data-original="#000000"></path></clipPath></defs><g clip-path="url(#a)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)"><path d="M0 0v80.813" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(356.006 423.687)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-80.813" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(412.575 504.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h80.813" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(343.884 504.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-18.183c0-7.811-6.332-14.142-14.143-14.142h-52.528c-7.81 0-14.142 6.331-14.142 14.142V0" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(165.085 268.122)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-56.569" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(124.679 235.797)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v-64.65" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(124.679 488.337)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h-32.325" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(140.841 488.337)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v159.61h-151.52V139.4c0-7.81-6.33-14.14-14.14-14.14h-92.94c-7.81 0-14.14 6.33-14.14 14.14v80.82c0 33.47 27.14 60.61 60.61 60.61H80.82c33.47 0 60.61-27.14 60.61-60.61V172" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(336.81 142.86)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v137" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(478.24 142.86)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h278.15v-103.03" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(200.09 142.86)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v62.63c0 22.31 18.09 40.4 40.41 40.4h90.92" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(33.76 39.83)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h64.97c4.46 0 8.08 3.62 8.08 8.08v16.16c0 4.47-3.62 8.09-8.08 8.09h-480.84c-4.46 0-8.08-3.62-8.08-8.09V8.08c0-4.46 3.62-8.08 8.08-8.08H-35" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(431.45 7.5)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0c0-11.158-9.045-20.203-20.203-20.203S-40.406-11.158-40.406 0s9.045 20.203 20.203 20.203S0 11.158 0 0Z" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(427.728 280.749)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0c0-11.158-9.045-20.203-20.203-20.203S-40.406-11.158-40.406 0s9.045 20.204 20.203 20.204S0 11.158 0 0Z" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(427.728 199.43)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v16.163" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(196.4 354.996)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v16.163" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(228.726 354.996)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v16.163" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(261.05 354.996)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v16.163" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(293.376 354.996)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0v16.163" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(325.701 354.996)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path><path d="M0 0h-231.327" style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(356.006 456.012)" fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" class=""></path></g></g></svg>
+        <div class="relative justify-center items-center">
+          <img
+            src="../assets/image/football player.png"
+            class="absolute left-96 -bottom-12 z-10"
+            alt=""
+          />
         </div>
-        <p class=" absolute mt-4 -ml-2 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Cloth sewing
-        </p>
-      </div> 
 
-      <div class="mx-auto pt-10 md:p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <i class="fa-regular fa-location-dot text-gray-900 text-5xl"></i>
+        <div class="relative justify-center items-center">
+          <img
+            src="../assets/image/image 1.png"
+            class="absolute left-[35.1rem] -bottom-8 w-[40rem] h-[27rem] rounded-tl-xl rounded-bl-[7rem] rounded-br-2xl"
+            alt=""
+          />
         </div>
-        <p class=" relative mt-4 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Free pickup
-        </p>
-      </div> 
-
-      <div class="mx-auto pt-10 md:p-4">
-        <div class="bg-blue-200 rounded-full py-4 px-4 w-24 h-24 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512.002 512.002" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M502.002 369.772H497v-59.616c0-11.341-2.82-15.822-9.467-20.448l-27.225-98.303c-2.02-7.299-10.004-10.589-25.004-14.438-9.779-2.509-23.443-5.301-39.514-8.072-22.354-3.854-48.412-7.469-64.547-9.043V113.79c0-5.523-4.477-10-10-10H22.254c-5.524 0-10 4.477-10 10v255.982H10c-5.523 0-10 4.478-10 10v14.999c0 13.785 11.215 25.001 25 25.001h35.85c1.922 11.408 7.066 21.732 14.475 29.998H38.967c-5.523 0-10 4.477-10 10s4.477 10 10 10h80.955l.078.002c29.676 0 54.373-21.662 59.15-50h163.701c4.775 28.338 29.475 50 59.15 50h71.033c5.522 0 10-4.478 10-10 0-5.523-4.478-10-10-10h-26.363c7.408-8.266 12.553-18.592 14.477-30H487c13.785 0 25.002-11.216 25.002-25.001v-14.999c0-5.522-4.479-10-10-10zm-41.314-102.068h-95.785v-46.529c35.188 1.854 63.754 4.64 85.197 8.301l10.588 38.228zM60.849 399.773H25c-2.711-.001-5-2.292-5-5.001v-4.999h43.439a59.468 59.468 0 0 0-2.59 10zm59.176 49.998H119.922C97.902 449.728 80 431.802 80 409.772c0-22.056 17.943-39.998 40-39.998 22.055 0 40 17.942 40 39.998 0 22.047-17.932 39.985-39.975 39.999zM120 349.774c-17.729 0-33.68 7.734-44.674 19.998H32.254V123.79h278.99v207.291h-23.178c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10h23.178v18.691H164.672c-10.992-12.264-26.943-19.998-44.672-19.998zm222.852 49.998H179.15a59.374 59.374 0 0 0-2.591-10h168.883a59.468 59.468 0 0 0-2.59 10zm59.15 50c-22.057 0-40-17.944-40-40s17.943-39.998 40-39.998c22.053 0 39.996 17.942 39.996 39.998 0 22.056-17.943 40-39.996 40zm0-99.998c-17.729 0-33.68 7.734-44.674 19.998h-26.084V179.953c13.322 1.367 34.189 4.147 55.66 7.722 33.963 5.656 49.721 10.002 55 12.208l2.33 8.411c-23.238-3.414-53.029-5.969-88.873-7.613a10.006 10.006 0 0 0-10.459 9.99v67.033c0 5.522 4.478 10 10 10h111.322l3.039 10.973a9.998 9.998 0 0 0 4.219 5.735l1.223.783c.727.462 1.58 1.007 2.123 1.391.08.562.172 1.632.172 3.57v19.616h-6.613c-5.523 0-10 4.478-10 10 0 5.523 4.477 10 10 10H477v20h-30.328c-10.994-12.264-26.943-19.998-44.67-19.998zM487 399.773h-25.852a59.468 59.468 0 0 0-2.59-10h33.443v4.999h.001c0 2.71-2.291 5.001-5.002 5.001z" fill="#000000" data-original="#000000" class=""></path><path d="M402.002 379.778c-16.539 0-29.994 13.455-29.994 29.994s13.455 29.994 29.994 29.994c16.537 0 29.99-13.455 29.99-29.994s-13.453-29.994-29.99-29.994zm0 39.989c-5.512 0-9.994-4.483-9.994-9.994s4.482-9.994 9.994-9.994c5.508 0 9.99 4.483 9.99 9.994 0 5.51-4.482 9.994-9.99 9.994zM120.002 379.778c-16.539 0-29.996 13.455-29.996 29.994s13.457 29.994 29.996 29.994 29.994-13.455 29.994-29.994-13.455-29.994-29.994-29.994zm0 39.989c-5.512 0-9.996-4.483-9.996-9.994s4.484-9.994 9.996-9.994c5.512 0 9.994 4.483 9.994 9.994 0 5.51-4.482 9.994-9.994 9.994zM10.236 449.771H10c-5.523 0-10 4.477-10 10s4.477 10 10 10h.236c5.522 0 10-4.477 10-10 0-5.524-4.478-10-10-10zM502.002 449.772h-.236c-5.521 0-10 4.477-10 10 0 5.522 4.479 10 10 10h.236c5.521 0 10-4.478 10-10 0-5.523-4.479-10-10-10zM100.688 160.434c-4.785-2.763-10.9-1.122-13.66 3.66l-31.66 54.837c-2.762 4.783-1.123 10.898 3.66 13.66a9.997 9.997 0 0 0 13.66-3.66l31.66-54.837c2.762-4.783 1.123-10.899-3.66-13.66zM136.687 160.434c-4.785-2.761-10.898-1.122-13.66 3.66l-31.66 54.837c-2.762 4.782-1.123 10.898 3.66 13.66a10.002 10.002 0 0 0 13.66-3.66l31.66-54.837c2.762-4.782 1.123-10.899-3.66-13.66zM172.685 160.434c-4.783-2.763-10.9-1.122-13.66 3.66l-31.658 54.837c-2.762 4.783-1.123 10.898 3.66 13.66a10 10 0 0 0 13.66-3.66l31.658-54.837c2.762-4.783 1.123-10.899-3.66-13.66zM161.781 42.23H10c-5.523 0-10 4.478-10 10 0 5.523 4.477 10 10 10h151.781c5.523 0 10-4.477 10-10 0-5.522-4.477-10-10-10zM195.002 42.23h-.799c-5.521 0-10 4.478-10 10 0 5.523 4.479 10 10 10h.799c5.521 0 10-4.477 10-10 0-5.522-4.479-10-10-10zM59.686 72.227h-.936c-5.521 0-10 4.478-10 10s4.479 10 10 10h.936c5.523 0 10-4.478 10-10s-4.477-10-10-10zM222.187 72.227H93.357c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10h128.83c5.523 0 10-4.478 10-10s-4.477-10-10-10zM263.398 331.081h-.615c-5.523 0-10 4.477-10 10s4.477 10 10 10h.615c5.523 0 10-4.478 10-10 0-5.523-4.477-10-10-10z" fill="#000000" data-original="#000000" class=""></path></g></svg>
-        </div>
-        <p class=" absolute mt-4 -ml-1 font-['Poppins'] font-semibold tracking-wide flex items-center justify-center">
-          Free delivery
-        </p>
-      </div> 
+      </div>
     </div>
-  
-  </div>
 
+    <!-- end content -->
+  </main>
 
-  <!-- screen 2 -->
-  <div class="min-h-screen bg-gray-900">
-    
-    
-      <div class="absolute mt-[100%] -ml-40 md:ml-0 md:mt-56 ">
-        <div class="absolute p-29 mx-56 my-12 -left-1.5">
-          <div class="font-[Bebas] font-extrabold text-purple-500 text-8xl md:text-9xl tracking-[8.5px] -rotate-6 ">
-            Get <br> 
-            Clean.
+  <main class="min-h-screen bg-[#171513] grid grid-cols-12">
+    <div class="col-span-7 w-full h-full">
+      <h1 class="text-white text-6xl mt-11 ml-5 font-semibold tracking-wide w-96 leading-tight">
+        Futsalverse™ our facilities.
+      </h1>
+
+      <ol class="list-disc mt-10 ml-11 leading-relaxed">
+        <li class="text-white font-['Poppins'] mt-3 text-2xl break-word">
+          International standard court from FIFA 40M x 20M.
+        </li>
+        <li class="text-white font-['Poppins'] mt-3 text-2xl break-word">
+          We have a good cafe for rest after playing futsal and <br />
+          very comfortable.
+        </li>
+        <li class="text-white font-['Poppins'] mt-3 text-2xl break-word">
+          We have a clean locker room and can be used to <br />
+          store your luggage.
+        </li>
+        <li class="text-white font-['Poppins'] mt-3 text-2xl break-word">Clean toilet.</li>
+      </ol>
+      <div>
+        <img src="../assets/image/Vector.png" class="h-44 w-full mt-1" />
+      </div>
+    </div>
+
+    <!-- colspan5 -->
+    <div class="col-span-5 h-full w-full flex items-center justify-center mt-0.5">
+      <div id="default-carousel" class="relative h-full w-full" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative h-56 overflow-hidden md:h-[40rem]">
+          <!-- Item 1 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img
+              src="../assets/image/court1.jpeg"
+              class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <!-- Item 2 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img
+              src="../assets/image/cafe.jpeg"
+              class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <!-- Item 3 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img
+              src="../assets/image/locker.jpeg"
+              class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <!-- Item 4 -->
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+            <img
+              src="../assets/image/toilet.jpeg"
+              class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
           </div>
         </div>
-
-        <div class="absolute p-29 mx-52 my-10">
-          <div class="font-[Bebas] font-extrabold text-stone-100 text-8xl md:text-9xl tracking-[8.5px] -rotate-6 ">
-            Get <br> 
-            Clean
-          </div>
-        </div>  
+        <!-- Slider indicators -->
+        <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="true"
+            aria-label="Slide 1"
+            data-carousel-slide-to="0"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 2"
+            data-carousel-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 3"
+            data-carousel-slide-to="2"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 4"
+            data-carousel-slide-to="3"
+          ></button>
+        </div>
+        <!-- Slider controls -->
+        <button
+          type="button"
+          class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-prev
+        >
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+            <span class="sr-only">Previous</span>
+          </span>
+        </button>
+        <button
+          type="button"
+          class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-next
+        >
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+            <span class="sr-only">Next</span>
+          </span>
+        </button>
       </div>
+    </div>
+  </main>
 
-  </div>
+  <main class="min-h-screen bg-[#E8E8E8]">
+    <div class="flex items-center justify-center">
+      <h1 class="text-center text-6xl font-extrabold font-['Helvetica'] italic mt-11 w-full">
+        How To Work
+      </h1>
+    </div>
+    <p class="text-center mt-6 font-semibold font-['Helvetica'] text-4xl">FUTSALVERSE™</p>
+    <div class="flex items-center justify-center">
+      <div class="inline-flex mt-6">
+        <div class="">
+          <img src="../assets/image/Tanggal.png" alt="" class="h-64" />
+          <p class="text-left mx-auto font-['Poppins'] relative bottom-4 text-3xl w-52 font-medium">
+            Choose date and time.
+          </p>
+        </div>
+        <div class="">
+          <img src="../assets/image/next.png" alt="" class="h-20 mt-24 mx-16" />
+        </div>
+        <div class="">
+          <img src="../assets/image/Pembayaran.png" alt="" class="h-64" />
+          <p class="text-left mx-auto font-['Poppins'] relative bottom-4 text-3xl w-72 font-medium">
+            Choose payment method.
+          </p>
+        </div>
+        <div class="">
+          <img src="../assets/image/next.png" alt="" class="h-20 mt-24 mx-16" />
+        </div>
+        <div class="">
+          <img src="../assets/image/Player.png" alt="" class="h-64" />
+          <p class="text-left mx-auto font-['Poppins'] relative bottom-4 text-3xl w-52 font-medium">
+            Let's play and have fun.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Foooter -->
+  <footer class="bg-[#F55736]">
+    <div class="max-w-screen-xl px-4 py-7 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+      <nav class="flex flex-wrap justify-center -mx-5 -my-2">
+        <div class="px-5 py-2">
+          <a href="#" class="text-base leading-6 text-gray-100 hover:text-gray-900"> Address </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base leading-6 text-gray-100 hover:text-gray-900"> Services </a>
+        </div>
+        <div class="px-5 py-2">
+          <a href="#" class="text-base leading-6 text-gray-100 hover:text-gray-900"> Contact </a>
+        </div>
+      </nav>
+      <div class="flex justify-center mt-8 space-x-6">
+        <a href="#" class="text-gray-100 hover:text-gray-900">
+          <span class="sr-only">Facebook</span>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              fill-rule="evenodd"
+              d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </a>
+        <a href="#" class="text-gray-100 hover:text-gray-900">
+          <span class="sr-only">Instagram</span>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              fill-rule="evenodd"
+              d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </a>
+        <a href="#" class="text-gray-100 hover:text-gray-900">
+          <span class="sr-only">Twitter</span>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+            ></path>
+          </svg>
+        </a>
+      </div>
+      <p class="mt-8 text-base leading-6 text-center text-gray-100">
+        © 2023 Futsalverse™ Inc. All rights reserved.
+      </p>
+    </div>
+  </footer>
 </template>
