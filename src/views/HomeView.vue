@@ -1,5 +1,29 @@
 <script setup>
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useAuthRepository } from '@/composables'
+
+  
+
+const repository = useAuthRepository()
+const route = useRoute()
+const router = useRouter()
+
+const userdata = JSON.parse(localStorage.getItem('user'))
+
+const isLoggingIn = ref(false)
+const logout = () => {
+  isLoggingIn.value = true
+  try {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('user')
+    repository.logout
+    router.replace({ name: 'logout' })
+  } catch (e) {
+    console.error(e)
+  }
+  isLoggingIn.value = false
+}
 
 const dropdown = ref(false)
 
@@ -10,8 +34,6 @@ const dropdown_show = () => {
 const dropdown_hide = () => {
   dropdown.value = false
 }
-
-const userdata = JSON.parse(localStorage.getItem('user'))
 </script>
 <template>
   <main class="h-screen bg-[#E8E8E8]">
@@ -38,19 +60,34 @@ const userdata = JSON.parse(localStorage.getItem('user'))
           <button
             v-if="dropdown"
             @click="dropdown_hide"
-            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 bg-[#f55736]"
           >
-            <div class="font-['Poppins'] font-semibold text-sm tracking-wide">
-              {{ userdata.name }}
+            <div class="font-['Poppins'] font-semibold text-sm tracking-wide text-white">
+              {{ userdata.name }}<i class="fas fa-chevron-up mx-1"></i>
             </div>
           </button>
 
           <div v-if="dropdown" class="absolute z-50 right-9 mt-2">
-            <div class="box-border w-40 h-20 bg-white rounded-xl flex items-center justify-center">
+            <div class="box-border w-40 bg-white rounded-lg">
               <div class="flex-row">
-                <p>{{ userdata.email }}</p>
-                <p>2</p>
-                <p>3</p>
+                <button
+                  data-modal-target="defaultModal"
+                  data-modal-toggle="defaultModal"
+                  class="border-b border-gray-900 w-full text-left hover:bg-gray-300 rounded-tr-lg rounded-tl-lg"
+                >
+                  <p class="font-['Poppins'] font-medium p-2">
+                    <span><i class="fa-regular fa-user text-gray-900 mx-2"></i></span> See profile
+                  </p>
+                </button>
+                <button
+                  @click="logout"
+                  class="w-full text-left hover:bg-gray-300 rounded-br-lg rounded-bl-lg"
+                >
+                  <p class="font-['Poppins'] font-medium p-2">
+                    <span><i class="fa-regular fa-right-from-bracket text-gray-900 mx-2"></i></span>
+                    Logout
+                  </p>
+                </button>
               </div>
             </div>
           </div>
@@ -61,15 +98,14 @@ const userdata = JSON.parse(localStorage.getItem('user'))
             class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
           >
             <div class="font-['Poppins'] font-semibold text-sm tracking-wide">
-              {{ userdata.name }}
+              {{ userdata.name }} <i class="fas fa-chevron-down"></i>
             </div>
-            
           </button>
         </div>
 
         <div v-else>
           <button
-            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300"
           >
             <RouterLink to="login" class="font-['Poppins'] font-semibold text-sm tracking-wide"
               >Sign in</RouterLink
