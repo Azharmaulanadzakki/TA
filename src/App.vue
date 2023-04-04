@@ -1,14 +1,14 @@
 <script setup>
 import { RouterView, useRouter } from 'vue-router'
 
-import Scroll from './components/Scroll.vue';
+import Scroll from './components/Scroll.vue'
 
 const router = useRouter()
 </script>
 
 <template>
   <div class="box-border antialiased">
-    <Scroll
+    <!-- <Scroll
       v-if="
         router.currentRoute.value.name !== 'login' &&
         router.currentRoute.value.name !== 'register' &&
@@ -16,7 +16,7 @@ const router = useRouter()
         router.currentRoute.value.name !== 'notfound' &&
         router.currentRoute.value.name !== 'logout'
       "
-    />
+    /> -->
 
     <RouterView />
   </div>
