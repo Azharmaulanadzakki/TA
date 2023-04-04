@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthRepository } from '@/composables'
+import { onMounted } from 'vue';
 
   
 
@@ -34,9 +35,32 @@ const dropdown_show = () => {
 const dropdown_hide = () => {
   dropdown.value = false
 }
+
+const loading = ref(false)
+const isloading = () => {
+  loading.value = true
+  setTimeout(function () {
+    loading.value = false
+  }, 2000)
+}
+
+onMounted(() => {
+  isloading()
+})
+
 </script>
 <template>
-  <main class="h-screen bg-[#E8E8E8]">
+
+  <div v-if="loading" class="min-h-screen flex items-center justify-center mx-auto">
+    <div class="flex items-center justify-center">
+      <div
+        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_0.5s_linear_infinite]"
+        role="status"
+      ></div>
+    </div>
+  </div>
+
+  <main v-else class="h-screen bg-[#E8E8E8]">
     <!-- Navbar -->
 
     <nav class="box-border bg-[#E8E8E8] w-full h-[5rem]">
@@ -46,13 +70,13 @@ const dropdown_hide = () => {
         </a>
         <ul class="flex items-center justify-center space-x-14 w-80 mx-auto">
           <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
-            <a href="">Address</a>
+            <RouterLink to="/">Address</RouterLink>
           </li>
           <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
-            <a href="">Services</a>
+            <RouterLink to="services">Services</RouterLink>
           </li>
           <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
-            <a href="">Contact</a>
+            <a href="https://wa.me/qr/YGI4YOYVBZ46E1">Contact</a>
           </li>
         </ul>
 
