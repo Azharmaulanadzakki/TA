@@ -24,8 +24,8 @@ const onSubmit = async () => {
       localStorage.setItem('user', JSON.stringify(data.user))
       router.replace({ name: 'home' })
     }
-  } catch (e) {
-    console.error(e)
+  } catch  (e) {
+    console.error(e)  
   }
 
   isLoggingIn.value = false
@@ -42,10 +42,9 @@ const onSubmit = async () => {
       <div class="md:flex w-full">
         <div class="hidden md:block w-1/2 bg-indigo-500 py-10 px-10 drop-shadow-2x1">
           <lottie-player
-            class="mx-auto scale-150"
-            src="https://lottie.host/ca70ed76-1cfa-45b6-9533-58d02abba327/S82YQWyF2i.json"
+            src="https://assets4.lottiefiles.com/packages/lf20_rs3afx1g.json"
             background="transparent"
-            speed="1.5"
+            speed="1"
             style="width: 300px; height: 300px"
             loop
             autoplay

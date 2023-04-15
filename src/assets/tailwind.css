@@ -29,3 +29,7 @@
 .text-shadow {
     text-shadow: -8px 0 0 rgb(102 123 242);
 }
+
+html{
+    scroll-behavior: smooth;
+}
