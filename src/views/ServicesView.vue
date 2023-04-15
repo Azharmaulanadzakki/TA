@@ -66,6 +66,7 @@ const isloading = () => {
 }
 
 onMounted(() => isloading())
+
 </script>
 
 <template>
@@ -85,7 +86,7 @@ onMounted(() => isloading())
           <a href="/" class="font-['Poppins'] font-semibold tracking-wide text-2xl flex-shrink-0">
             Futsalverse™
           </a>
-          <ul class="flex items-center justify-center space-x-14 w-80 mx-auto">
+          <ul class="flex items-center justify-center space-x-14 w-full mx-auto">
             <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
               <RouterLink to="/">Address</RouterLink>
             </li>
@@ -101,7 +102,7 @@ onMounted(() => isloading())
             <button
               v-if="dropdown"
               @click="dropdown_hide"
-              class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 bg-[#f55736]"
+              class="p-3 px-10 w-40 border-2 border-black rounded-xl flex items-center justify-center mr-2 bg-[#f55736]"
             >
               <div class="font-['Poppins'] font-semibold text-sm tracking-wide text-white">
                 {{ userdata.name }}<i class="fas fa-chevron-up mx-1"></i>
@@ -138,7 +139,7 @@ onMounted(() => isloading())
             <button
               v-else
               @click="dropdown_show"
-              class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+              class="p-3 px-10 w-40 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
             >
               <div class="font-['Poppins'] font-semibold text-sm tracking-wide">
                 {{ userdata.name }} <i class="fas fa-chevron-down"></i>

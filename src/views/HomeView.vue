@@ -44,6 +44,15 @@ const isloading = () => {
   }, 2000)
 }
 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e){
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior : "smooth"
+    });
+  });
+});
+
 onMounted(() => {
   isloading()
 })
@@ -54,7 +63,7 @@ onMounted(() => {
   <div v-if="loading" class="min-h-screen flex items-center justify-center mx-auto">
     <div class="flex items-center justify-center">
       <div
-        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_0.5s_linear_infinite]"
+        class="overflow-hidden inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_0.5s_linear_infinite]"
         role="status"
       ></div>
     </div>
@@ -68,7 +77,7 @@ onMounted(() => {
         <a href="#" class="font-['Poppins'] font-semibold tracking-wide text-2xl flex-shrink-0">
           Futsalverse™
         </a>
-        <ul class="flex items-center justify-center space-x-14 w-80 mx-auto">
+        <ul class="flex items-center justify-center space-x-14 w-full mx-auto">
           <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
             <RouterLink to="/">Address</RouterLink>
           </li>
@@ -76,15 +85,18 @@ onMounted(() => {
             <RouterLink to="services">Services</RouterLink>
           </li>
           <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
-            <a href="https://wa.me/qr/YGI4YOYVBZ46E1">Contact</a>
+            <a href="#a">Contact</a>
           </li>
+          <li class="mx-2 text-black font-semibold tracking-wide font-['Poppins']">
+              <a href="#a">How to work</a>
+            </li>
         </ul>
 
         <div v-if="userdata">
           <button
             v-if="dropdown"
             @click="dropdown_hide"
-            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 bg-[#f55736]"
+            class="p-3 px-10 w-40 border-2 border-black rounded-xl flex items-center justify-center mr-2 bg-[#f55736]"
           >
             <div class="font-['Poppins'] font-semibold text-sm tracking-wide text-white">
               {{ userdata.name }}<i class="fas fa-chevron-up mx-1"></i>
@@ -119,32 +131,34 @@ onMounted(() => {
           <button
             v-else
             @click="dropdown_show"
-            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
+            class="p-3 px-10 w-40 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300 hover:text-white duration-300"
           >
-            <div class="font-['Poppins'] font-semibold text-sm tracking-wide">
-              {{ userdata.name }} <i class="fas fa-chevron-down"></i>
+            <div class="font-['Poppins'] font-semibold text-sm tracking-wide w-full">
+              {{ userdata.name }} <i class="fas fa-chevron-down "></i>
             </div>
           </button>
         </div>
 
         <div v-else>
-          <button
-            class="p-3 px-6 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300"
-          >
-            <RouterLink to="login" class="font-['Poppins'] font-semibold text-sm tracking-wide"
-              >Sign in</RouterLink
+          <div class="flex inline-flex">  
+            <button
+              class="p-3 px-1 border-2 border-black rounded-xl flex items-center justify-center mr-2 hover:bg-[#f55736] duration-300"
             >
-          </button>
-
-          <button
-            class="p-3 px-4 border-2 border-black bg-black rounded-xl flex items-center justify-center hover:bg-gray-500 duration-300"
-          >
-            <RouterLink
-              to="register"
-              class="font-['Poppins'] font-semibold text-sm text-white tracking-wide"
-              >Get Started</RouterLink
+              <RouterLink to="login" class="font-['Poppins'] font-semibold text-sm tracking-wide w-20"
+                >Sign in</RouterLink
+              >
+            </button>
+  
+            <button
+              class="p-3 px-2 border-2 border-black bg-black rounded-xl flex items-center justify-center hover:bg-gray-500 duration-300"
             >
-          </button>
+              <RouterLink
+                to="register"
+                class="font-['Poppins'] font-semibold text-sm text-white tracking-wide w-28"
+                >Get Started</RouterLink
+              >
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -337,7 +351,7 @@ onMounted(() => {
     </div>
   </main>
 
-  <main class="min-h-screen bg-[#E8E8E8]">
+  <main id="a" class=" min-h-screen bg-[#E8E8E8]">
     <div class="flex items-center justify-center">
       <h1 class="text-center text-6xl font-extrabold font-['Helvetica'] italic mt-11 w-full">
         How To Work
